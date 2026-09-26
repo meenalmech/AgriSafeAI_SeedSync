@@ -1,0 +1,14 @@
+{
+  "crop": "Chili",
+  "task": "Pesticide spraying",
+  "planned_time": "14:00",
+  "duration_minutes": 60,
+  "chemical": "Demo Pesticide X",
+  "temperature_c": 34,
+  "humidity_pct": 82,
+  "wind_kmh": 18,
+  "rain_probability_pct": 70,
+  "worker_exposure_hours": 4,
+  "ppe_complete": false,
+  "demo_mode": true
+}

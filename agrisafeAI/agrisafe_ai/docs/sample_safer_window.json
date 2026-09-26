@@ -1,0 +1,9 @@
+{
+  "crop": "Chili",
+  "task": "Pesticide spraying",
+  "chemical": "Demo Pesticide X",
+  "duration_minutes": 60,
+  "worker_exposure_hours": 1,
+  "ppe_complete": true,
+  "demo_mode": true
+}

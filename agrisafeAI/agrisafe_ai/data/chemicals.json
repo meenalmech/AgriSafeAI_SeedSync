@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Demo Pesticide X",
+    "category": "pesticide",
+    "hazard_score": 25,
+    "required_ppe": ["gloves", "protective clothing", "eye protection", "respiratory protection where specified by label/SDS"],
+    "reentry_interval_hours": 24,
+    "preharvest_interval_days": 7,
+    "notes": "Demonstration record only. Replace with verified product label/SDS before real use."
+  },
+  {
+    "name": "Demo Fertilizer A",
+    "category": "fertilizer",
+    "hazard_score": 10,
+    "required_ppe": ["gloves", "eye protection"],
+    "reentry_interval_hours": 0,
+    "preharvest_interval_days": 0,
+    "notes": "Demonstration record only. Replace with verified product label/SDS before real use."
+  }
+]

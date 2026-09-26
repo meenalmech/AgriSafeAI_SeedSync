@@ -1,0 +1,22 @@
+[
+  {
+    "id": "heat-001",
+    "topic": "heat",
+    "text": "Outdoor agricultural work can create heat stress risk. Consider temperature, humidity, air movement, physical workload, clothing/PPE, duration and breaks. Use hydration, rest and scheduling controls appropriate to the work and local guidance."
+  },
+  {
+    "id": "spray-001",
+    "topic": "pesticide spraying",
+    "text": "Pesticide work should follow the product label and SDS. Assess chemical hazard, exposure routes, required PPE, equipment condition, weather and drift controls before spraying."
+  },
+  {
+    "id": "weather-001",
+    "topic": "weather",
+    "text": "Weather-sensitive tasks should be reassessed when conditions change. Wind can affect spray drift, rain can affect outdoor work and treatment effectiveness, and high heat can increase worker exposure."
+  },
+  {
+    "id": "missing-001",
+    "topic": "missing information",
+    "text": "Missing critical safety information should not be treated as low risk. If the chemical identity, label/SDS or required PPE cannot be verified, the system should flag the assessment as incomplete."
+  }
+]

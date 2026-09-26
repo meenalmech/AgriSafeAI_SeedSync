@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AgriSafe AI | Keselamatan Kerja Ladang</title>
+  <link rel="stylesheet" href="/static/styles.css?v=4">
+</head>
+<body>
+<header class="topbar">
+  <div><div class="brand">🌿 AgriSafe AI</div><div class="tagline">Semak risiko sebelum kerja bermula.</div></div>
+  <span class="badge">Demo keselamatan ladang</span>
+</header>
+<main class="container">
+  <section class="hero">
+    <div><h1>Kerja ladang lebih selamat</h1><p>Masukkan kerja yang dirancang. AgriSafe AI menyemak cuaca, bahan kimia, PPE dan pendedahan pekerja untuk memberi keputusan yang mudah difahami.</p></div>
+    <div class="hero-stat"><strong>4</strong><span>keputusan</span><small>Teruskan · Ubah · Tangguh · Elak</small></div>
+  </section>
+
+  <section class="grid">
+    <form id="assessmentForm" class="card">
+      <h2>1. Beritahu rancangan kerja anda</h2>
+      <label>Demo pantas<select id="demoScenario"><option value="">Pilih contoh untuk pembentangan</option><option value="spray-risk">Sembur racun ketika panas dan berangin</option><option value="spray-safe">Cari masa lebih sesuai untuk semburan</option><option value="inspection">Pemeriksaan sawah pada waktu pagi</option></select></label>
+      <div class="row">
+        <label>Tanaman
+          <select name="crop" required>
+            <option value="">Pilih tanaman</option>
+            <optgroup label="Buah-buahan">
+              <option>Banana</option><option>Coconut</option><option>Durian</option><option>Mango</option><option>Papaya</option><option>Pineapple</option><option>Watermelon</option>
+            </optgroup>
+            <optgroup label="Sayur-sayuran">
+              <option>Chili</option><option>Eggplant</option><option>Lady's finger</option><option>Leafy vegetables</option><option>Long bean</option><option>Okra</option><option>Tomato</option>
+            </optgroup>
+            <optgroup label="Bijirin dan tanaman ladang">
+              <option>Rice</option><option>Corn</option><option>Soybean</option><option>Peanut</option>
+            </optgroup>
+            <optgroup label="Herba dan rempah">
+              <option>Ginger</option><option>Lemongrass</option><option>Turmeric</option><option>Other herbs</option>
+            </optgroup>
+            <optgroup label="Lain-lain">
+              <option>Orchard</option><option>Nursery plants</option><option>Other crop</option>
+            </optgroup>
+          </select>
+        </label>
+        <label>Jenis kerja<select name="task"><option>Pesticide spraying</option><option>Fertilizer application</option><option>Field inspection</option><option>Harvesting</option><option>Machinery operation</option><option>Livestock handling</option></select></label>
+      </div>
+      <div class="row">
+        <label>Bahasa<select name="language"><option value="ms" selected>Bahasa Melayu</option><option value="en">English</option></select></label>
+      </div>
+      <div class="row">
+        <label>Tarikh mula<input name="planned_date" type="date" required></label>
+        <label>Masa mula<input name="planned_time" type="time" value="14:00" required></label>
+      </div>
+      <div class="row">
+        <label>Lokasi ladang
+          <select name="area" id="areaSelect">
+            <option value="">Pilih negeri dan daerah</option>
+          </select>
+        </label>
+        <div class="weather-fetch-wrap">
+          <button class="secondary small" id="fetchWeatherBtn" type="button">Guna ramalan</button>
+          <span id="weatherStatus" class="weather-status" aria-live="polite"></span>
+        </div>
+        <label>Tempoh (minit)<input name="duration_minutes" type="number" min="15" max="720" value="60"></label>
+      </div>
+      <div class="row">
+        <label>Latitude<input name="latitude" type="number" step="any" placeholder="3.1390"></label>
+        <label>Longitude<input name="longitude" type="number" step="any" placeholder="101.6869"></label>
+      </div>
+      <div class="row">
+        <label>Bahan kimia<input name="chemical" value="Demo Pesticide X" placeholder="Wajib untuk kerja kimia"></label>
+        <label>Peringkat tanaman<select name="growth_stage"><option value="">Tidak dinyatakan</option><option>Seedling</option><option>Vegetative</option><option>Flowering</option><option>Fruit set</option><option>Maturity</option></select></label>
+      </div>
+      <div class="row">
+        <label>Peralatan<select name="equipment"><option value="">Tidak dinyatakan</option><option>Knapsack sprayer</option><option>Boom sprayer</option><option>Drone</option><option>Manual hand tools</option><option>Machinery</option></select></label>
+        <label>Bilangan pekerja<input name="workers_count" type="number" min="1" max="200" value="3"></label>
+      </div>
+      <div class="row">
+        <label>Kerja luar sebelum ini (jam)<input name="worker_exposure_hours" type="number" min="0" max="24" step="0.5" value="4"></label>
+        <label>Suhu °C<input name="temperature_c" type="number" step="0.1" placeholder="Guna ramalan"></label>
+      </div>
+      <div class="row">
+        <label>Kelembapan %<input name="humidity_pct" type="number" step="1" placeholder="Guna ramalan"></label>
+        <label>Angin km/j<input name="wind_kmh" type="number" step="0.1" placeholder="Guna ramalan"></label>
+      </div>
+      <div class="row">
+        <label>Kebarangkalian hujan %<input name="rain_probability_pct" type="number" step="1" placeholder="Guna ramalan"></label>
+      </div>
+      <label class="check"><input name="ppe_complete" type="checkbox"> PPE yang diperlukan sudah diperiksa dan lengkap</label>
+      <fieldset class="worker-flags"><legend>Keadaan khas pekerja</legend><label class="check"><input name="vulnerability_flags" type="checkbox" value="pregnancy"> Kehamilan</label><label class="check"><input name="vulnerability_flags" type="checkbox" value="respiratory"> Masalah pernafasan</label><label class="check"><input name="vulnerability_flags" type="checkbox" value="not_acclimatized"> Belum biasa dengan cuaca panas</label></fieldset>
+      <label class="check"><input name="demo_mode" type="checkbox" checked> Guna mod demo</label>
+      <button class="secondary" id="clearAssessmentBtn" type="button">Kosongkan / Penilaian baharu</button>
+      <button class="primary" type="submit">Semak keselamatan</button>
+      <p id="formError" class="error"></p>
+    </form>
+
+    <section class="card result-card" id="resultCard">
+      <div class="empty" id="emptyState"><div class="empty-icon">🛡️</div><h2>Keputusan keselamatan anda akan muncul di sini</h2><p>Jalankan semakan untuk melihat tahap risiko, sebab dan tindakan yang disyorkan.</p></div>
+      <div id="resultContent" hidden>
+        <div class="result-header"><div><span class="eyebrow">Decision</span><h2 id="decision"></h2></div><div class="score" id="score"></div></div>
+        <div id="level" class="level"></div>
+        <p id="summary" class="summary"></p>
+        <div class="result-section"><h3>Kenapa keputusan ini?</h3><ul id="reasons"></ul></div>
+        <div class="result-section"><h3>Apa yang patut saya buat?</h3><ul id="actions"></ul></div>
+        <div class="result-section"><h3>Peraturan yang terlibat</h3><div id="rules" class="chips"></div></div>
+        <div class="weather-box"><strong>Keadaan cuaca</strong><div id="weather"></div></div>
+        <div class="guidance-grid"><div class="guidance-box"><strong>Senarai PPE</strong><ul id="ppeChecklist"></ul></div><div class="guidance-box"><strong>Pelan kerja dan rehat</strong><div id="workRestPlan"></div></div><div class="guidance-box"><strong>Masa selamat masuk / menuai</strong><div id="safetyTiming"></div></div></div>
+        <button class="secondary" id="saferButton">Cari masa yang lebih selamat</button>
+        <div id="saferResult" class="safer"></div>
+      </div>
+    </section>
+  </section>
+
+  <section class="card history-card">
+    <div class="section-title"><h2>Rekod penilaian</h2><button class="secondary small" id="refreshHistory">Muat semula</button></div>
+    <div id="history">Sedang dimuatkan...</div>
+  </section>
+  <section class="card emergency-card"><h2>Panel kecemasan</h2><p>Jika berlaku pendedahan bahan kimia atau strok haba, hentikan kerja dan dapatkan bantuan segera.</p><div id="emergencyGuidance">Memuatkan panduan...</div></section>
+
+  <section class="card workspace-card">
+    <div class="section-title"><div><h2>Ruang kerja petani</h2><p>Rekod ladang, plot dan kejadian disimpan secara tempatan untuk demo ini.</p></div><span id="profileStatus" class="weather-status">Belum didaftarkan</span></div>
+    <div class="workspace-grid">
+      <form id="farmerForm"><h3>Profil petani</h3><label>Nama<input name="farmer_name" required placeholder="Nama anda"></label><label>No. telefon<input name="farmer_phone" placeholder="Untuk SMS / WhatsApp kemudian"></label><button class="secondary" type="submit">Daftar profil</button></form>
+      <form id="farmForm"><h3>Tambah ladang</h3><label>Nama ladang<input name="farm_name" required placeholder="Contoh: Kebun Utama"></label><label>Lokasi<input name="farm_location" placeholder="Daerah / negeri"></label><button class="secondary" type="submit">Tambah ladang</button></form>
+      <form id="incidentForm"><h3>Lapor kejadian</h3><label>Jenis<select name="incident_kind"><option>Near miss</option><option>Pendedahan bahan kimia</option><option>Strok haba</option><option>Kecederaan</option></select></label><label>Keterangan<textarea name="incident_description" required rows="3" placeholder="Apa yang berlaku?"></textarea></label><button class="secondary" type="submit">Simpan laporan</button></form>
+    </div>
+    <div class="workspace-actions"><button class="secondary small" id="downloadCsvBtn" type="button">Muat turun CSV HIRARC</button><button class="secondary small" id="downloadHtmlBtn" type="button">Buka laporan HIRARC</button><span id="workspaceMessage" class="weather-status"></span></div>
+  </section>
+</main>
+<script src="/static/app.js?v=7"></script>
+</body>
+</html>
